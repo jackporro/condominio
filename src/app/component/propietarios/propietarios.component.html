@@ -1,0 +1,84 @@
+<div class="container">
+  <div class="row">
+    <div class="cols s12">
+      <table>
+        <thead>
+          <tr>
+            <th>Nombre</th>
+            <th>Contacto</th>
+            <th>Nº Casa</th>
+          </tr>
+        </thead>
+    
+        <tbody>
+          <tr *ngFor="let propietario of propietariosService.listaPropietarios">
+            <td>{{ propietario.nombreCompleto }}</td>
+            <td>{{ propietario.contacto }}</td>
+            <td>{{ propietario.casa }}</td>
+          </tr>
+          <tr>
+            <td><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+              Agregar
+            </button></td>
+          </tr>
+        </tbody>
+      </table>
+
+    </div>
+  </div>
+  
+
+<br />
+<!-- Button trigger modal -->
+<!-- Modal -->
+<div class="modal fade modalConfig" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true"
+  >
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5>Agregar Propietarios</h5>
+      </div>
+      <div class="modal-body">
+        <form  [formGroup]="formPropietarios">
+
+          <input type="text" formControlName="nombreCompleto" placeholder="Ingresar nombre" />
+          <div *ngIf="(formPropietarios.get('nombreCompleto').errors && 
+                        formPropietarios.get('nombreCompleto').touched) ||
+                          formPropietarios.get('nombreCompleto').dirty">
+            <div class="texto-validacion" *ngIf=" formPropietarios.get('nombreCompleto').hasError('required')">
+              campo requerido
+            </div>
+          </div>
+          
+          <input type="number" formControlName="contacto" placeholder="985827703" />
+          <div *ngIf="(formPropietarios.get('contacto').errors && 
+                        formPropietarios.get('contacto').touched) ||
+                          formPropietarios.get('contacto').dirty">
+            <div class="texto-validacion" *ngIf=" formPropietarios.get('contacto').hasError('required')">
+              campo requerido
+            </div>
+          </div>
+
+          <input type="number" formControlName="casa" placeholder="Numero Casa" />
+          <div *ngIf="(formPropietarios.get('casa').errors && 
+                        formPropietarios.get('casa').touched) ||
+                          formPropietarios.get('casa').dirty">
+            <div class="texto-validacion" *ngIf=" formPropietarios.get('casa').hasError('required')">
+              campo requerido
+            </div>
+          </div>
+
+          
+
+        </form>
+      </div>
+
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="resetForm()">
+          Cerrar
+        </button>
+        <button type="button" style="margin-left: 20px;" data-dismiss="modal" class="btn btn-primary" (click)="agregarPropietarios()" [disabled]="formPropietarios.invalid">Guardar</button>
+      </div>
+    </div>
+  </div>
+</div>

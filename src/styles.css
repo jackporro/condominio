@@ -1,0 +1,10 @@
+/* You can add global styles to this file, and also import other style files */
+.texto-validacion {
+    font-family: Arial;
+    color : white;
+    background-color: red;
+    border-radius: 3px;
+    opacity: 0.8;
+    text-align: center;
+
+}

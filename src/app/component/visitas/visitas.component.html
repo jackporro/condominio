@@ -1,0 +1,155 @@
+<div class="row">
+  <div class="col s6">
+    <div class="container">
+      <div class="anchura card">
+        <div class="card-content">
+          <span class="card-title">Formulario de Visita</span>
+          <form (ngSubmit)="agregarVisitas()" [formGroup]="formVisitas">
+            <div class="row">
+              <div class="input-field col s12">
+                <input
+                  type="text"
+                  formControlName="name"
+                  placeholder="Ingresar nombre"
+                  name="name"
+                />
+                <div
+                  *ngIf="
+                    (formVisitas.get('name').errors &&
+                      formVisitas.get('name').touched) ||
+                    formVisitas.get('name').dirty
+                  "
+                >
+                  <div
+                    class="texto-validacion"
+                    *ngIf="formVisitas.get('name').hasError('required')"
+                  >
+                    campo requerido
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="input-field col s12">
+                <input
+                  type="text"
+                  formControlName="apellido"
+                  placeholder="Ingresar apellido"
+                />
+                <div
+                  *ngIf="
+                    (formVisitas.get('apellido').errors &&
+                      formVisitas.get('apellido').touched) ||
+                    formVisitas.get('apellido').dirty
+                  "
+                >
+                  <div
+                    class="texto-validacion"
+                    *ngIf="formVisitas.get('apellido').hasError('required')"
+                  >
+                    campo requerido
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="input-field col s12">
+                <input
+                  type="text"
+                  formControlName="patente"
+                  placeholder="Ingresar patente"
+                />
+                <div
+                  *ngIf="
+                    (formVisitas.get('patente').errors &&
+                      formVisitas.get('patente').touched) ||
+                    formVisitas.get('patente').dirty
+                  "
+                >
+                  <div
+                    class="texto-validacion"
+                    *ngIf="formVisitas.get('patente').hasError('required')"
+                  >
+                    campo requerido
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="input-field col s12">
+                <input
+                  type="number"
+                  formControlName="casa"
+                  placeholder="Ingresar numero de casa"
+                />
+                <div
+                  *ngIf="
+                    (formVisitas.get('casa').errors &&
+                      formVisitas.get('casa').touched) ||
+                    formVisitas.get('casa').dirty
+                  "
+                >
+                  <div
+                    class="texto-validacion"
+                    *ngIf="formVisitas.get('casa').hasError('required')"
+                  >
+                    campo requerido
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="input-field col s12">
+                <input type="text" formControlName="fecha" />
+              </div>
+            </div>
+            <div class="card-action">
+              <div class="input-field col-s12">
+                <button
+                  class="btn right"
+                  style="margin-left: 50px;"
+                  (click)="resetForm()"
+                >
+                  Clean
+                </button>
+                <button
+                  class="btn btn-primary right"
+                  [disabled]="formVisitas.invalid"
+                >
+                  Save
+                </button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col s6">
+    <span><strong>Listado de Visitas Ingresadas</strong> , {{ today | date: "dd-MM-yyyy HH:mm:ss-SS" }}</span>
+    <br>
+    <br>
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Nombre</th>
+          <th scope="col">Apellido</th>
+          <th scope="col">Patente vehiculo</th>
+          <th scope="col">Casa visitante</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr
+          *ngFor="let visita of visitasService.listaVisitas; let indice = index"
+        >
+          <td>{{ indice + 1 }}</td>
+          <td>{{ visita.name }}</td>
+          <td>{{ visita.apellido }}</td>
+          <td>{{ visita.patente }}</td>
+          <td>{{ visita.casa }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
